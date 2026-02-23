@@ -6,6 +6,7 @@ import {
   VerificationLog,
   VerificationStats,
 } from './interfaces/verification.interface';
+import { VerificationLogRepository } from './repositories/verificationLog.repository';
 
 /**
  * Verification Service for VeriTix
@@ -20,6 +21,7 @@ import {
  */
 @Injectable()
 export class VerificationService {
+  constructor(private readonly verificationLogRepository: VerificationLogRepository) {}
   /**
    * Verifies a ticket code.
    * @param request - The verification request data
@@ -90,9 +92,10 @@ export class VerificationService {
    * @param _eventId - The event's unique identifier
    * @returns Promise resolving to array of verification logs
    */
-  getLogsForEvent(_eventId: string): Promise<VerificationLog[]> {
+  async getLogsForEvent(_eventId: string): Promise<VerificationLog[]> {
     // TODO: Implement database query
-    return Promise.resolve([]);
+    const logs = await this.verificationLogRepository.getLogsForEvent(_eventId);
+    return logs;
   }
 
   /**
@@ -100,9 +103,10 @@ export class VerificationService {
    * @param _ticketCode - The ticket code
    * @returns Promise resolving to array of verification logs
    */
-  getLogsForTicket(_ticketCode: string): Promise<VerificationLog[]> {
+  async getLogsForTicket(_ticketCode: string): Promise<VerificationLog[]> {
     // TODO: Implement database query
-    return Promise.resolve([]);
+    const logs = await this.verificationLogRepository.getLogsForTicket(_ticketCode);
+    return logs;
   }
 
   /**

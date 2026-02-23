@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { VerificationService } from './verification.service';
 import { VerificationController } from './verification.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { VerificationLogEntity } from './entities/verification-log.entity';
+import { VerificationLogRepository } from './repositories/verificationLog.repository';
 
 /**
  * Verification Module for VeriTix
@@ -36,8 +39,9 @@ import { VerificationController } from './verification.controller';
  * ```
  */
 @Module({
+  imports: [TypeOrmModule.forFeature([VerificationLogEntity])],
   controllers: [VerificationController],
-  providers: [VerificationService],
-  exports: [VerificationService],
+  providers: [VerificationService,VerificationLogRepository],
+  exports: [VerificationService,VerificationLogRepository],
 })
 export class VerificationModule {}

@@ -124,7 +124,7 @@ export interface VerificationLog {
   verifierId?: string;
 
   /** Verification timestamp */
-  verifiedAt: Date;
+  verifiedAt?: Date;
 
   /** Device/location information */
   deviceInfo?: string;
